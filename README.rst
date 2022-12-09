@@ -39,22 +39,24 @@ A cog that allows users to add Steam Games to a pool. Users can add or remove St
 Allows users to add games they'd like to play to a channel pool and then chooses a random game to play
 
 SubCommands: 
+
 Add: [p]gamepool add <game>
 
 Remove: [p]gamepool remove <game>
 
 Pick: [p]gamepool pick
 
-This cogs looks at all the message history of a channel and looks for specific messages from the bot to generate the pool when the pick command is run. A link to the Steam page will be generated once a game is picked.
+This cog looks at all the message history of a channel and pulls messages from the bot to generate the pool when the pick command is run. A link to the Steam page will be generated once a game is picked.
 
-The added <game> must be one that is available on Steam and must me spelled correctly. Games can be added multiple times to the pool but duplicates will be removed on pick.
+The added <game> must be one that is available on Steam and must be spelled correctly. If it is missspelled you will get an error. Games can be added multiple times to the pool but duplicates will be removed on pick.
+
 The remove command will remove all references of the <game> from the pool.
 
 ------------
 Contributing
 ------------
 
-If you have ideas, you can open an issue. If you have coded new features, make a PR. I'm happy to make changes to these cogs!
+Open that PR! Always happy to improve the cogs.
 
 
 -------
