@@ -40,7 +40,9 @@ Allows users to add games they'd like to play to a channel pool and then chooses
 
 SubCommands: 
 Add: [p]gamepool add <game>
+
 Remove: [p]gamepool remove <game>
+
 Pick: [p]gamepool pick
 
 This cogs looks at all the message history of a channel and looks for specific messages from the bot to generate the pool when the pick command is run. A link to the Steam page will be generated once a game is picked.
@@ -61,6 +63,4 @@ LICENSE
 
 This repository and its cogs are protected under the MIT License.
 
-For further information, please click `here <https://github.com/AAA3A-AAA3A/AAA3A-cogs/blob/main/LICENSE>`_
-
-Copyright (c) 2022 AAA3A
+For further information, please click `here <https://github.com/V-Shadbolt/Shadbolt-Cogs/blob/main/LICENSE>`_
