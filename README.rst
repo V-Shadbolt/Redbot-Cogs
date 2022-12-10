@@ -34,9 +34,7 @@ This list of cogs is not up to date. At the time of writing there is 1.
 
 **GamePool:**
 
-A cog that allows users to add Steam Games to a pool. Users can add or remove Steam games to a channel's pool and then pick a random game from the pool.
-
-Allows users to add games they'd like to play to a channel pool and then chooses a random game to play
+A cog that allows users to add Steam Games to a pool. Users can add or remove Steam games to a channel's pool, look at the current pool, see previous pool winners, and pick a new winner.
 
 SubCommands: 
 
@@ -44,9 +42,13 @@ Add: [p]gamepool add <game>
 
 Remove: [p]gamepool remove <game>
 
+List: [p]gamepool list
+
 Pick: [p]gamepool pick
 
-This cog looks at all the message history of a channel and pulls messages from the bot to generate the pool when the pick command is run. A link to the Steam page will be generated once a game is picked.
+Winners: [p]gamepool winners
+
+This cog updates the pool(s) to a text file when add, remove, or pick commands are run. A link to the Steam page will be generated once a game is picked.
 
 The added <game> must be one that is available on Steam and must be spelled correctly. If it is missspelled you will get an error. Games can be added multiple times to the pool but duplicates will be removed on pick.
 
