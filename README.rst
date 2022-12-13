@@ -48,6 +48,8 @@ Pick: [p]gamepool pick
 
 Winners: [p]gamepool winners
 
+Host: [p]gamepool host <game>
+
 This cog updates the pool(s) to a text file when add, remove, or pick commands are run. A link to the Steam page will be generated once a game is picked.
 
 The added <game> must be one that is available on Steam and must be spelled correctly. If it is missspelled you will get an error. Games can be added multiple times to the pool but duplicates will be removed on pick.

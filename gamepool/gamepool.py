@@ -9,7 +9,7 @@ class GamePool(commands.Cog):
 
     @commands.group()
     async def gamepool(self, ctx):
-        """Main command for the GamePool Cog"""
+        """Create a pool of games that a channel is interested in playing together and pick a winner from the pool"""
         return
     
     @gamepool.command()
@@ -41,3 +41,9 @@ class GamePool(commands.Cog):
         """List the channel's previous Game Pool winners"""
         # Delete game from pool
         await Utils.readPool(ctx, True)
+    
+    @gamepool.command()
+    async def host(self, ctx, *, game):
+        """Pick a new host for the winning game"""
+        # Delete game from pool
+        await Utils.pickNewHost(ctx, game, True)
