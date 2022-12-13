@@ -70,13 +70,13 @@ class Utils:
             with open(file, "w+") as f:
                 for line in lines:
                     if game.lower() in line.lower():
-                        new_line = line.split(": ")
+                        new_line = line.split("Hosted by: ")
                         old_host = ctx.guild.get_member_named(new_line[1].strip("\n"))
                         for user in users:
                             if user != old_host and user.bot != True:
                                 filtered_members.append(user)
                         new_host = random.choice(filtered_members)
-                        f.write(new_line[0] + ": " + str(new_host) + "\n")
+                        f.write(new_line[0] + "Hosted by: " + str(new_host) + "\n")
                         found_game = True
                     else:
                         f.write(line)
@@ -84,9 +84,13 @@ class Utils:
                 if not found_game:
                     await ctx.send("Game was not found in the pool.")
                     return
-                await ctx.send(f"{old_host.mention} couldn't cut it huh?")
-                await ctx.send(f"Let's make your new host {new_host.mention}")
-                return new_host
+                if old_host is not None and new_host is not None:
+                    await ctx.send(f"{old_host.mention} couldn't cut it huh?")
+                    await ctx.send(f"Let's make your new host {new_host.mention}")
+                    return
+                else:
+                    await ctx.send("Old host couldn't cut it huh?")
+                    await ctx.send("Let's make your new host @" + str(new_host))
     
     async def makeFile(file):
         if not os.path.exists(file):
