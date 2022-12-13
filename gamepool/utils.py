@@ -73,7 +73,7 @@ class Utils:
                         new_line = line.split(": ")
                         old_host = ctx.guild.get_member_named(new_line[1].strip("\n"))
                         for user in users:
-                            if user != old_host:
+                            if user != old_host and user.bot != True:
                                 filtered_members.append(user)
                         new_host = random.choice(filtered_members)
                         f.write(new_line[0] + ": " + str(new_host) + "\n")
