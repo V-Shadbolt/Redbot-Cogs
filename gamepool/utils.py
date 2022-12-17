@@ -15,7 +15,7 @@ class Utils:
         response = response['applist']['apps']
         # Parse list of apps for specified game. If not found return
         try:
-            gameid = next((item for item in response if item["name"].lower() == gamename.lower()))
+            gameid = next((item for item in response if item["name"].lower().replace(" ", "").replace(":", "") == gamename.lower().replace(" ", "").replace(":", "")))
         except StopIteration:
             await session.close()
             return False
