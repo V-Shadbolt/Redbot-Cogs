@@ -161,10 +161,9 @@ class Utils:
         if not justList:
             # List off the pool and return
             if pickCommand:
-                await ctx.send("Here are the past winners: ")
+                message_string = "Here are the past winners: \n\t"
             else:
-                await ctx.send("Here's the current pool: ")
-            message_string = ""
+                message_string = "Here's the current pool: \n\t"
             for game in game_pool:
                 message_string += str("\t- " + game + "\n")
             await ctx.send(message_string)
