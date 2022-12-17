@@ -136,12 +136,12 @@ class Utils:
             if valid:
                 with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
                     f.write(game + "\n")
-                await Utils.readPool(ctx)
+                # await Utils.readPool(ctx)
         else:
             with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + "_Winners.txt","a+") as f:
                     f.write("\"" + game + "\" on " + datetime.today().strftime('%Y-%m-%d') + " | Hosted by: " + str(host) +"\n")
     
-    async def readPool(ctx, pickCommand = False):
+    async def readPool(ctx, pickCommand = False, justList = False):
         """Read all games in the pool"""
         game_pool = []
         # Ensure pool(s) file exists
@@ -158,19 +158,20 @@ class Utils:
         if not game_pool:
             await ctx.send("No games in the pool!")
             return False
-        # List off the pool and return
-        if pickCommand:
-            await ctx.send("Here are the past winners: ")
-        else:
-            await ctx.send("Here's the current pool: ")
-        for game in game_pool:
-            await ctx.send(game)
+        if not justList:
+            # List off the pool and return
+            if pickCommand:
+                await ctx.send("Here are the past winners: ")
+            else:
+                await ctx.send("Here's the current pool: ")
+            for game in game_pool:
+                await ctx.send(game)
         return game_pool
     
     async def pickFromPool(ctx, pickCommand = True):
         """Pick a random game form the pool"""
         # Get possible choices in the pool
-        game_pool = await Utils.readPool(ctx)
+        game_pool = await Utils.readPool(ctx, False, True)
         if game_pool:
             # Pick random game from the pool and send result to channel
             random_game = random.choice(game_pool)
