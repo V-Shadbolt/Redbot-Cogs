@@ -161,9 +161,9 @@ class Utils:
         if not justList:
             # List off the pool and return
             if pickCommand:
-                message_string = "Here are the past winners: \n\t"
+                message_string = "Here are the past winners: \n"
             else:
-                message_string = "Here's the current pool: \n\t"
+                message_string = "Here's the current pool: \n"
             for game in game_pool:
                 message_string += str("\t- " + game + "\n")
             await ctx.send(message_string)
