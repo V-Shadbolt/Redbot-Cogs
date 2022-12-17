@@ -164,8 +164,10 @@ class Utils:
                 await ctx.send("Here are the past winners: ")
             else:
                 await ctx.send("Here's the current pool: ")
+            message_string = ""
             for game in game_pool:
-                await ctx.send(game)
+                message_string += str("\t- " + game + "\n")
+            await ctx.send(message_string)
         return game_pool
     
     async def pickFromPool(ctx, pickCommand = True):
