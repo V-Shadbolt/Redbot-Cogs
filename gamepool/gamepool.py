@@ -102,7 +102,7 @@ class GamePool(commands.Cog):
             # Add game and host to the winners file
             with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + "_Winners.txt","a+") as f:
                 f.write("\"" + game + "\" on " + datetime.today().strftime('%Y-%m-%d') + " | Hosted by: " + str(host) +"\n")
-    
+
     @gamepool.command()
     async def winners(self, ctx):
         """List the channel's previous Game Pool winners"""
@@ -139,8 +139,10 @@ class GamePool(commands.Cog):
         # Rewrite pool and attempt to change game host
         found_game = False
         with open(file, "w+") as f:
-            for line in lines:
-                if game.lower() in line.lower():
+            # Read / write file in reverse to get most recent occurance of game
+            for line in reversed(lines):
+                # Only edit the most recent occurance
+                if game.lower() in line.lower() and not found_game:
                     found_game = True
                     # Split line to pull the name of the previous host
                     current_line = line.split("Hosted by: ")
@@ -160,18 +162,25 @@ class GamePool(commands.Cog):
                     
                 else:
                     f.write(line)
-            # Report to channel
-            if not found_game:
-                await ctx.send("Game was not found in the pool.")
-            elif new_host != "":
-                # Found new host
-                try:
-                    await ctx.send(f"{old_host.mention} couldn't cut it huh? Let's make your new host {new_host.mention}")
-                except:
-                    await ctx.send(str(old_host) + " couldn't cut it huh? Let's make your new host " + str(new_host))
-            else:
-                # No other host possible
-                try:
-                    await ctx.send(f"There's no other hosts to choose from! You're all we got {old_host.mention}")
-                except:
-                    await ctx.send("There's no other hosts to choose from! You're all we got " + str(old_host))
+        # Rewrite reversed file back in order
+        with open(file, "r+") as f:
+            lines = f.readlines()
+        with open(file, "w+") as f:
+            for line in reversed(lines):
+                f.write(line)
+        # Report to channel
+        if not found_game:
+            await ctx.send("Game was not found in the pool.")
+        elif new_host != "":
+            # Found new host
+            try:
+                await ctx.send(f"{old_host.mention} couldn't cut it huh? Let's make your new host {new_host.mention}")
+            except:
+                await ctx.send(str(old_host) + " couldn't cut it huh? Let's make your new host " + str(new_host))
+        else:
+            # No other host possible
+            try:
+                await ctx.send(f"There's no other hosts to choose from! You're all we got {old_host.mention}")
+            except:
+                await ctx.send("There's no other hosts to choose from! You're all we got " + str(old_host))
+            
