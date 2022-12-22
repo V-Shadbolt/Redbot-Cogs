@@ -49,3 +49,25 @@ class Utils:
         """Make a new text file"""
         if not os.path.exists(file):
             f = open(file, "w+")
+    
+    async def deleteFile(file):
+        """Delete an existing text file"""
+        if os.path.exists(file):
+            os.remove(file)
+
+    async def tally(opt_dict, tally, message):
+        """Tally up reaction counts"""
+        for reaction in message.reactions:
+            if reaction.emoji in opt_dict.keys():
+                reactors = await reaction.users().flatten()
+                for reactor in reactors:
+                    if reactor.bot != True:
+                        tally[reaction.emoji] += 1
+        return tally
+    
+    async def voteTally(opt_dict, tally, message):
+        """Tally up reaction counts"""
+        for reaction in message.reactions:
+            if reaction.emoji in opt_dict.keys():
+                tally[reaction.emoji] += 1
+        return tally
