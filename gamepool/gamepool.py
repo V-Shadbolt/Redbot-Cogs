@@ -107,9 +107,11 @@ class GamePool(commands.Cog):
             if list:
                 # Send pool to channel and return list
                 message_string = "Here's the current pool: \n"
-                for game in game_pool:
-                    game = str(game).strip()
-                    message_string += str("\t- " + game + "\n")
+                for i, game in enumerate(game_pool):
+                    if not i:
+                        message_string += str("\t- " + game + "\n")
+                    else:
+                        message_string += str("- " + game + "\n")
                 await ctx.send(message_string)
             return game_pool
     
@@ -134,9 +136,11 @@ class GamePool(commands.Cog):
             if list:
                 # Send pool to channel and return list
                 message_string = "Here were the last nomination results (Game : Votes): \n"
-                for game in game_pool:
-                    game = str(game).strip()
-                    message_string += str("\t- " + game + "\n")
+                for i, game in enumerate(game_pool):
+                    if not i:
+                        message_string += str("\t- " + game + "\n")
+                    else:
+                        message_string += str("- " + game + "\n")
                 await ctx.send(message_string)
             return game_pool
     
@@ -345,9 +349,11 @@ class GamePool(commands.Cog):
         else:
             # Send pool to channel
             message_string = "Here are the past winners: \n"
-            for winner in winner_pool:
-                winner = str(winner).strip()
-                message_string += str("\t- " + winner + "\n")
+            for i, winner in enumerate(winner_pool):
+                if not i:
+                    message_string += str("\t- " + winner + "\n")
+                else:
+                    message_string += str("- " + winner + "\n")
             await ctx.send(message_string)
     
     @gamepool.command()
