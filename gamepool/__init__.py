@@ -1,6 +1,6 @@
 from .gamepool import GamePool
 
 
-def setup(bot):
+async def setup(bot):
     n = GamePool(bot)
-    bot.add_cog(n)
+    await bot.add_cog(n)
