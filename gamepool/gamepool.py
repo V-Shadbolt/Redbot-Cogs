@@ -27,9 +27,13 @@ class GamePool(commands.Cog):
         gameName = gameInfo[1]
         if embed:
             # Report success to channel and add to file
-            await ctx.send("Added \"" + gameName + "\" to the pool. \nHere's the link:", embed=embed)
             with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
-                f.write(gameName + "\n")
+                if gameName not in f.read():
+                    await ctx.send("Added \"" + gameName + "\" to the pool. \nHere's the link:", embed=embed)
+                    f.write(gameName + "\n")
+                else:
+                    await ctx.send("\"" + gameName + "\" is already added the pool. \nHere's the link:", embed=embed)
+                    
         else:
             # Report failure to channel
             await ctx.send("There was an issue finding your game on Steam. Ensure the name is spelled correctly.")
