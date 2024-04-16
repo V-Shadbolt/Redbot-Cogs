@@ -38,7 +38,7 @@ class Utils:
                                 description="Steam Link for " + appName, color=0x42a6cc)
         embed.add_field(name="Steam Game ID", value=appid, inline=True)
         embed.add_field(name="Steam Game Name", value=appName, inline=True)
-        return embed
+        return embed, appName
 
     async def pickHost(users):
         """Pick the host of winning game"""

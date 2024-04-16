@@ -22,12 +22,14 @@ class GamePool(commands.Cog):
     async def add(self, ctx, *, game):
         """Add a game to the channel's Game Pool"""
         # Check if wanted game can be found on steam and write to pool
-        embed = await Utils.gameInfo(game)
+        gameInfo = await Utils.gameInfo(game)
+        embed = gameInfo[0]
+        gameName = gameInfo[1]
         if embed:
             # Report success to channel and add to file
-            await ctx.send("Added \"" + game + "\" to the pool. \nHere's the link:", embed=embed)
+            await ctx.send("Added \"" + gameName + "\" to the pool. \nHere's the link:", embed=embed)
             with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
-                f.write(game + "\n")
+                f.write(gameName + "\n")
         else:
             # Report failure to channel
             await ctx.send("There was an issue finding your game on Steam. Ensure the name is spelled correctly.")
