@@ -23,9 +23,13 @@ class GamePool(commands.Cog):
         """Add a game to the channel's Game Pool"""
         # Check if wanted game can be found on steam and write to pool
         gameInfo = await Utils.gameInfo(game)
-        embed = gameInfo[0]
-        gameName = gameInfo[1]
-        if embed:
+        if not gameInfo:
+            # Report failure to channel
+            await ctx.send("There was an issue finding your game on Steam. Ensure the name is spelled correctly.")
+            return False
+        else:
+            embed = gameInfo[0]
+            gameName = gameInfo[1]
             duplicate = False
             # Check for duplicate and report to channel if it is
             with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt") as f:
@@ -37,9 +41,7 @@ class GamePool(commands.Cog):
                 with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
                     await ctx.send("Added \"" + gameName + "\" to the pool. \nHere's the link:", embed=embed)
                     f.write(gameName + "\n")
-        else:
-            # Report failure to channel
-            await ctx.send("There was an issue finding your game on Steam. Ensure the name is spelled correctly.")
+            
     
     @gamepool.command()
     async def remove(self, ctx, *, game):

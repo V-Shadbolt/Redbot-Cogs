@@ -28,17 +28,18 @@ class Utils:
         """Convert game ID to steam link"""
         # Search Steam for game ID
         appData = await Utils.gameToId(game)
-        appid = appData[0]
-        appName = appData[1]
         # Check if no games matched the search
-        if not appid:
+        if not appData:
             return False
-        # Message link to Steam game to channel if game was picked
-        embed = discord.Embed(title="Steam Game Information", url="https://store.steampowered.com/app/" + str(appid),
-                                description="Steam Link for " + appName, color=0x42a6cc)
-        embed.add_field(name="Steam Game ID", value=appid, inline=True)
-        embed.add_field(name="Steam Game Name", value=appName, inline=True)
-        return embed, appName
+        else:
+            appid = appData[0]
+            appName = appData[1]
+            # Message link to Steam game to channel if game was picked
+            embed = discord.Embed(title="Steam Game Information", url="https://store.steampowered.com/app/" + str(appid),
+                                    description="Steam Link for " + appName, color=0x42a6cc)
+            embed.add_field(name="Steam Game ID", value=appid, inline=True)
+            embed.add_field(name="Steam Game Name", value=appName, inline=True)
+            return embed, appName
 
     async def pickHost(users):
         """Pick the host of winning game"""
