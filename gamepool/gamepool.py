@@ -26,14 +26,17 @@ class GamePool(commands.Cog):
         embed = gameInfo[0]
         gameName = gameInfo[1]
         if embed:
-            # Report success to channel and add to file
-            with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
-                if gameName not in f.read():
+            duplicate = False
+            # Check for duplicate and report to channel if it is
+            with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt") as f:
+                if gameName in f.read():
+                    await ctx.send("\"" + gameName + "\" is already added the pool. \nHere's the link:", embed=embed)
+                    duplicate = True
+            # If not a duplicate, report success to channel and add to file
+            if not duplicate:
+                with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
                     await ctx.send("Added \"" + gameName + "\" to the pool. \nHere's the link:", embed=embed)
                     f.write(gameName + "\n")
-                else:
-                    await ctx.send("\"" + gameName + "\" is already added the pool. \nHere's the link:", embed=embed)
-                    
         else:
             # Report failure to channel
             await ctx.send("There was an issue finding your game on Steam. Ensure the name is spelled correctly.")
