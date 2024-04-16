@@ -25,7 +25,7 @@ class GamePool(commands.Cog):
         embed = await Utils.gameInfo(game)
         if embed:
             # Report success to channel and add to file
-            await ctx.send("Added \"" + game + "\" to the pool")
+            await ctx.send("Added \"" + game + "\" to the pool. \nHere's the link:", embed=embed)
             with open("GamePool_" + str(ctx.guild.id) + "_" + str(ctx.channel.id) + ".txt","a+") as f:
                 f.write(game + "\n")
         else:
@@ -109,7 +109,7 @@ class GamePool(commands.Cog):
                 message_string = "Here's the current pool: \n"
                 for i, game in enumerate(game_pool):
                     if not i:
-                        message_string += str("\t- " + game + "\n")
+                        message_string += str("- " + game + "\n")
                     else:
                         message_string += str("- " + game + "\n")
                 await ctx.send(message_string)
@@ -138,7 +138,7 @@ class GamePool(commands.Cog):
                 message_string = "Here were the last nomination results (Game : Votes): \n"
                 for i, game in enumerate(game_pool):
                     if not i:
-                        message_string += str("\t- " + game + "\n")
+                        message_string += str("- " + game + "\n")
                     else:
                         message_string += str("- " + game + "\n")
                 await ctx.send(message_string)
@@ -351,7 +351,7 @@ class GamePool(commands.Cog):
             message_string = "Here are the past winners: \n"
             for i, winner in enumerate(winner_pool):
                 if not i:
-                    message_string += str("\t- " + winner + "\n")
+                    message_string += str("- " + winner + "\n")
                 else:
                     message_string += str("- " + winner + "\n")
             await ctx.send(message_string)
